@@ -1,0 +1,12 @@
+[gdn]
+compute = "torch_reference"
+state_io = "packed"
+prefill_io = "reference"
+
+[runtime]
+torch_compile = false
+cuda_graph = false
+
+[speculation]
+method = "none"
+num_speculative_tokens = 0

@@ -1,0 +1,9 @@
+name: lightdelta
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - cmake>=3.26
+  - ninja
+  - ripgrep

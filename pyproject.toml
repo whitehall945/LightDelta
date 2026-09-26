@@ -1,0 +1,36 @@
+[build-system]
+requires = ["scikit-build-core>=0.11,<0.12"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "lightdelta"
+version = "0.1.0"
+description = "Gated DeltaNet reference and CUDA inference backend research"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["torch==2.13.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1", "scikit-build-core>=0.11,<0.12", "matplotlib>=3.10,<4"]
+
+[project.scripts]
+lightdelta = "lightdelta.cli:main"
+
+[project.entry-points."vllm.general_plugins"]
+lightdelta = "lightdelta.integration:register"
+
+[tool.scikit-build]
+wheel.packages = ["python/lightdelta"]
+cmake.build-type = "Release"
+build-dir = "build/{wheel_tag}"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["cuda: requires a CUDA GPU"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
